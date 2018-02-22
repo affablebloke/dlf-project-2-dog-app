@@ -17,7 +17,7 @@ services:
     build:
       context: ./app
     command: sh ./start.sh
-    #command: sh ./dev.sh
+    # command: sh ./dev.sh
     volumes:
       - ./app:/code
     ports:

@@ -71,6 +71,10 @@ export default class Index extends React.Component {
             font-family: Roboto;
             text-decoration: none;
         }
+        body{
+          background: #40555f;
+          min-width: 900px;
+        }
         h1{
           font-size: 1.5em;
         }
