@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: ./python-api
+    command: python app.py
+    volumes:
+     - ./python-api:/code
+     - ../dogImages:/dogImages
+     - ../bottleneck_features:/bottleneck_features
+     - ../haarcascades:/haarcascades
+     - ../saved_models:/saved_models
+    ports:
+      - "5000:5000"
+  app:
+    build:
+      context: ./app
+    command: sh ./start.sh
+    #command: sh ./dev.sh
+    volumes:
+      - ./app:/code
+    ports:
+      - "3000:3000"
