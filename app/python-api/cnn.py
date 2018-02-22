@@ -12,6 +12,7 @@ from keras.preprocessing import image
 from keras.utils import np_utils
 from sklearn.datasets import load_files
 
+
 print('Loading bottleneck features...')
 bottleneck_features = np.load('/bottleneck_features/DogResnet50Data.npz')
 train_Resnet50 = bottleneck_features['train']
@@ -32,14 +33,16 @@ dog_names = [item[20:-1] for item in sorted(glob("/dogImages/train/*/"))]
 print('There are %d total dog categories.' % len(dog_names))
 
 _ResNet50_model = ResNet50(weights='imagenet')
+_ResNet50_model_without_top_layer = ResNet50(weights='imagenet', include_top=False)
 
-def load_model():
-    model = Sequential()
-    model.add(GlobalAveragePooling2D(
-        input_shape=train_Resnet50.shape[1:]))
-    model.add(Dense(133, activation='softmax'))
-    model.load_weights('/saved_models/weights.best.Resnet50.hdf5')
-    return model
+
+print('Loading custom model...')
+_my_model = Sequential()
+_my_model.add(GlobalAveragePooling2D(
+    input_shape=train_Resnet50.shape[1:]))
+_my_model.add(Dense(133, activation='softmax'))
+_my_model.load_weights('/saved_models/weights.best.Resnet50.hdf5')
+print(_my_model.summary())
 
 
 def path_to_tensor(img):
@@ -52,10 +55,10 @@ def path_to_tensor(img):
 
 
 def Resnet50_predict_breed(img):
-    model = load_model()
     # extract bottleneck features
-    bottleneck_feature = extract_Resnet50(path_to_tensor(img))
-    predicted_vector = model.predict(bottleneck_feature)
+    img = preprocess_input(path_to_tensor(img))
+    bottleneck_feature = extract_Resnet50(img, model=_ResNet50_model_without_top_layer)
+    predicted_vector = _my_model.predict(bottleneck_feature)
     # return dog breed that is predicted by the model
     return dog_names[np.argmax(predicted_vector)]
 

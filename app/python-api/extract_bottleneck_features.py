@@ -6,9 +6,11 @@ def extract_VGG19(tensor):
 	from keras.applications.vgg19 import VGG19, preprocess_input
 	return VGG19(weights='imagenet', include_top=False).predict(preprocess_input(tensor))
 
-def extract_Resnet50(tensor):
+def extract_Resnet50(tensor, model=None):
 	from keras.applications.resnet50 import ResNet50, preprocess_input
-	return ResNet50(weights='imagenet', include_top=False).predict(preprocess_input(tensor))
+	if not model:
+		return ResNet50(weights='imagenet', include_top=False).predict(preprocess_input(tensor))
+	return model.predict(preprocess_input(tensor))
 
 def extract_Xception(tensor):
 	from keras.applications.xception import Xception, preprocess_input
