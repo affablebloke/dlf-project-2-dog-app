@@ -48,11 +48,6 @@ export default class Index extends React.Component {
           <Clipboard style={{ alignSelf: 'center', marginRight: '.5em' }} />
           <h1>DLF Project 2: Dog Breed Classifier</h1>
         </div>
-        <div className="button-container">
-          <form encType="multipart/form-data" name="remittance-form">
-            {!isProcessing && <label className="button" htmlFor="photo">{photoUrl ? `Classify Another Photo` : `Upload and Classify Photo`}<input id="photo" style={{ display: 'none' }} accept="image/*" onChange={this.onUploadPhoto} type="file" name="photo" ref={(input) => { this.photoFileInput = input; }} /></label>}
-          </form>
-        </div>
         {photoUrl &&
           <img style={{ width: '350px', objectFit: 'contain', alignSelf: 'center', marginTop: '2.0em', border: '2px solid #01579B' }} src={photoUrl} />}
         {isProcessing && <div className="image-container">
@@ -63,15 +58,29 @@ export default class Index extends React.Component {
           <a target="_blank" href={`https://www.google.com/search?q=${prediction.breed}`} className="breed-name">{prediction.breed}</a>
           { prediction.error && <p className="assumption">The image provided does not resemble a human or dog!</p> }
         </div>}
+        <div className="button-container">
+          <form encType="multipart/form-data" name="remittance-form">
+            {!isProcessing && <label className="button" htmlFor="photo">{photoUrl ? `Classify Another Photo` : `Upload and Classify Photo`}<input id="photo" style={{ display: 'none' }} accept="image/*" onChange={this.onUploadPhoto} type="file" name="photo" ref={(input) => { this.photoFileInput = input; }} /></label>}
+          </form>
+        </div>
         <style jsx>{`
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Roboto;
+            text-decoration: none;
+        }
         .title-container{
+          padding: 10px;
           display: flex;
           flex: 1;
           justify-content: center;
           flex-direction: row;
+          background-color: #eeeeee;
         }
         .button-container{
-          margin-top: 2.0em;
+          margin: 4.0em;
           display: flex;
           flex-direction: row;
           justify-content: center;
@@ -111,7 +120,8 @@ export default class Index extends React.Component {
           cursor: pointer;
         }
         .container {
-          margin-top: 2.0em;
+          margin: 0;
+          padding: 0;
           display: flex;
           flex: 1;
           flex-direction: column;
