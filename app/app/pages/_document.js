@@ -14,13 +14,18 @@ export default class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
         </Head>
-        <body >
+        <body>
           {this.props.customValue}
           <Main />
           <NextScript />
         </body>
         <style global jsx>{`
+        body{
+          background: #40555f;
+          min-width: 900px;
+        }
         * {
+            font-smoothing: antialiased;
             margin: 0;
             padding: 0;
             box-sizing: border-box;

@@ -49,9 +49,9 @@ export default class Index extends React.Component {
           <h1>DLF Project 2: Dog Breed Classifier</h1>
         </div>
         {photoUrl &&
-          <img style={{ width: '350px', objectFit: 'contain', alignSelf: 'center', marginTop: '2.0em', border: '2px solid #01579B' }} src={photoUrl} />}
+          <img className="img-container" src={photoUrl} />}
         {isProcessing && <div className="image-container">
-          <p style={{fontSize: '1.5em'}}><Cpu /> Processing image....</p>
+          <p style={{fontSize: '1.5em', color: 'white'}}><Cpu /> Processing image....</p>
         </div>}
         {prediction && !isProcessing && <div className="prediction-container">
           { !prediction.error && <p className="assumption">{prediction.is_dog ? `This dog looks like a....` : `This human looks like a....`}</p> }
@@ -71,13 +71,25 @@ export default class Index extends React.Component {
             font-family: Roboto;
             text-decoration: none;
         }
+        h1{
+          font-size: 1.5em;
+        }
+        .img-container{
+          width: 350px;
+          object-fit: contain;
+          align-self: center;
+          margin-top: 2.0em;
+          box-shadow: 1px 1px 5px rgba(0,0,0,.35);
+        }
         .title-container{
           padding: 10px;
           display: flex;
           flex: 1;
           justify-content: center;
           flex-direction: row;
-          background-color: #eeeeee;
+          color: white;
+          background-color: rgba(0,0,0,.05);
+          border-bottom: 1px solid rgba(0,0,0,.20);
         }
         .button-container{
           margin: 4.0em;
@@ -97,13 +109,16 @@ export default class Index extends React.Component {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          align-self: center;
+          color: white;
+          padding: 1.5em;
         }
         .prediction-container a{
-          color: #2196F3;
+          color: white;
           text-decoration: underline;
         }
         .prediction-container a:active{
-          color: #2196F3;
+          color: #white;
         }
         .breed-name{
           font-size: 2.0em;
@@ -113,11 +128,12 @@ export default class Index extends React.Component {
           font-size: 1.25em;
         }
         .button{
-          background-color: #03a9f4;
+          background-color: #2196f3;
           border-radius: 2.0em;
           padding: 1em 2em;
           color: white;
           cursor: pointer;
+          box-shadow: 1px 1px 5px rgba(0,0,0,.25);
         }
         .container {
           margin: 0;
